@@ -1,5 +1,6 @@
 field,display_name,btn,hidden,sort_name
-org,Org,,,Organization
+org,,,true,Organization
+shortorg,Org,true,,
 date-range,Date,,,Date
 description,,,
 subject,,,true

@@ -1,12 +1,12 @@
 {%- assign gallery = site.data.gallery_images | where_exp: "item","item.label == page.title" | first -%}
-
+{% if gallery != nil %}
 {%- assign carousel-items = gallery.items | split: ";" -%}
 {%- assign carousel-titles = gallery.titles | split: ";" -%}
-
-
+{% else %}
+{%- capture carousel-items -%}{{page.featured_image | plus: 1}};{{page.featured_image | plus: 2}};{{page.featured_image | plus: 3}};{{page.featured_image | plus: 4}};{{page.featured_image | plus: 5}};{{page.featured_image | plus: 6}}{% endcapture %}
+{% endif %}
 
 <script> 
-    //title,youtubeid,objectid
     var carouselItems = [ {% for c in carousel-items %}{% if forloop.first %}[ "Item {{forloop.index}} - {{ page.title | escape }}", "{{ page.featured_image }}", "{{ page.img_small }}" ],{% else %}[ "","{{ c }}", "{{ page.img_small | replace: page.featured_image, c }}" ]{% unless forloop.last %}, {% endunless %}{% endif %}{% endfor %}];
     var placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E";
     var carousel = document.getElementById("carouselInner");
