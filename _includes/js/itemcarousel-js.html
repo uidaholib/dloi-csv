@@ -2,12 +2,16 @@
 {% if gallery != nil %}
 {%- assign carousel-items = gallery.items | split: ";" -%}
 {%- assign carousel-titles = gallery.titles | split: ";" -%}
+{% elsif page.featured_image contains "/" %}
+{%- capture carousel-items-raw -%}0;1;2;3;4{% endcapture %}
+{%- assign carousel-items = carousel-items-raw | split: ";" -%}
 {% else %}
-{%- capture carousel-items -%}{{page.featured_image | plus: 1}};{{page.featured_image | plus: 2}};{{page.featured_image | plus: 3}};{{page.featured_image | plus: 4}};{{page.featured_image | plus: 5}};{{page.featured_image | plus: 6}}{% endcapture %}
+{%- capture carousel-items-raw -%}{{page.featured_image | plus: 1}};{{page.featured_image | plus: 2}};{{page.featured_image | plus: 3}};{{page.featured_image | plus: 4}};{{page.featured_image | plus: 5}};{{page.featured_image | plus: 6}}{% endcapture %}
+{%- assign carousel-items = carousel-items-raw | split: ";" -%}
 {% endif %}
 
 <script> 
-    var carouselItems = [ {% for c in carousel-items %}{% if forloop.first %}[ "Item {{forloop.index}} - {{ page.title | escape }}", "{{ page.featured_image }}", "{{ page.img_small }}" ],{% else %}[ "","{{ c }}", "{{ page.img_small | replace: page.featured_image, c }}" ]{% unless forloop.last %}, {% endunless %}{% endif %}{% endfor %}];
+    var carouselItems = [ {% for c in carousel-items %}{% if forloop.first %}[ "Item {{forloop.index}} - {{ page.title | escape }}", "{% unless page.feature_image contains "/" %}{{ page.featured_image }}{%endunless%}", "{{ page.img_small }}" ],{% else %}[ "","{{ c }}", "https://{{page.cdm-collection}}.contentdm.oclc.org/.contentdm.oclc.org/digital/iiif/{{page.collection-name}}/{{ c }}/full/pct:50/0/default.jpg" ]{% unless forloop.last %}, {% endunless %}{% endif %}{% endfor %}];
     var placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E";
     var carousel = document.getElementById("carouselInner");
     var i, itemImg;
