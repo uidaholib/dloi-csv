@@ -27,10 +27,10 @@ description: "The Digital Library of Idaho is a collection of digital libraries 
 # creator of the digital collection, to appear in meta tags; we typically use our GitHub usernames but feel free to just use your name
 author: dcnb
 # Organization branding
-organization-name: "Digital Initiatives, University of Idaho Library"
-organization-link: https://www.lib.uidaho.edu/digital/
-organization-logo-banner: https://www.lib.uidaho.edu/media/digital/justdi_logo_sm.png
-organization-logo-nav: https://www.lib.uidaho.edu/media/digital/bannerlogo_allwhite.png
+organization-name: "Digital Library of Idaho"
+organization-link: /
+organization-logo-banner: /assets/img/idaho-logo-black.jpg
+organization-logo-nav: https://www.idaho.gov/assets/idaho-mtn-white-2e298f22a9acdebc15d510d5352821496028ea47adb04186901d08f8647dbede.svg
 
 ##########
 # COLLECTION SETTINGS
