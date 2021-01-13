@@ -53,7 +53,7 @@ layout: page
             <div class="card-body">
               <ul>
                 {% for org in site.data.orgs%}
-                <li><a href="#{{org.short}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
+                <li class="my-1 small"><a href="#{{org.short}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -72,7 +72,7 @@ layout: page
             <div class="card-body">
               <ul>
                 {% for region in site.data.regions%}
-                <li><a href="#{{region.short}}" class="text-dark">{{region.title}}</a></li>
+                <li class="my-1 small"><a href="#{{region.short}}" class="text-dark">{{region.title}}</a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -90,7 +90,7 @@ layout: page
             <div class="card-body">
                 <ul>
                     {% for subject in site.data.subjects%}
-                    <li><a href="#{{subject.short}}">{{subject.title}}</a></li>
+                    <li class="my-1 small"><a href="#{{subject.short}}"  class="text-dark">{{subject.title}}</a></li>
                     {% endfor %}
                   </ul>
             </div>
@@ -108,7 +108,7 @@ layout: page
             <div class="card-body">
                 <ul>
                     {% for type in site.data.types%}
-                    <li><a href="#{{type.short}}">{{type.title}}</a></li>
+                    <li class="my-1 small"><a href="#{{type.short}}"  class="text-dark">{{type.title}}</a></li>
                     {% endfor %}
                   </ul>
             </div>
