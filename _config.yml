@@ -29,8 +29,8 @@ author: dcnb
 # Organization branding
 organization-name: "Digital Library of Idaho"
 organization-link: /
-organization-logo-banner: /assets/img/idaho-logo-black.jpg
-organization-logo-nav: https://www.idaho.gov/assets/idaho-mtn-white-2e298f22a9acdebc15d510d5352821496028ea47adb04186901d08f8647dbede.svg
+organization-logo-banner: /assets/img/DLoI.png
+organization-logo-nav: /assets/img/DLoI.png
 
 ##########
 # COLLECTION SETTINGS

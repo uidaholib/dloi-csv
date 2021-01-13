@@ -35,5 +35,89 @@ layout: page
 <div id="loading" class="text-center">
     <div class="spinner-border text-secondary" role="status"><span class="sr-only">Loading...</span></div>
 </div>
-
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-3">
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingZero">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left h4 text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+                Organization
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <ul>
+                {% for org in site.data.orgs%}
+                <li><a href="#{{org.short}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left h4 text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Region
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <ul>
+                {% for region in site.data.regions%}
+                <li><a href="#{{region.short}}" class="text-dark">{{region.title}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left h4 text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Subjects
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <ul>
+                    {% for subject in site.data.subjects%}
+                    <li><a href="#{{subject.short}}">{{subject.title}}</a></li>
+                    {% endfor %}
+                  </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left h4 text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Type
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                <ul>
+                    {% for type in site.data.types%}
+                    <li><a href="#{{type.short}}">{{type.title}}</a></li>
+                    {% endfor %}
+                  </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    <div class="col-9 pl-5">
 <div class="row" id="browseItems"></div>
+    </div> 
+</div>
+</div>

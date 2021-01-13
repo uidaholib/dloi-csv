@@ -7,6 +7,7 @@ body {
     @if $base-font-family != "" { font-family: $base-font-family; }
     @if $base-font-size != "" { font-size: $base-font-size; }
     @if $text-color != "" { color: $text-color; }
+    letter-spacing: 1.6px;
 }
 a {
     @if $link-color != "" { 
@@ -50,7 +51,7 @@ a {
     padding:.5em;
 }
 #home-title-box {
-    img { height:40px; }
+    img { height:120px; }
 }
 #home-banner {
     @include media-query($on-palm) {

@@ -16,7 +16,7 @@ function makeCard(obj) {
         var thumbSrc = '{{ "/assets/icons/collection.svg" | relative_url }}';
     }
     // start card
-    var card = '<div class="item col-lg-4 col-md-6 col-sm-12 mb-2"><div class="card text-center">';
+    var card = '<div class="item col-md-5 col-sm-12 mb-2"><div class="card text-center">';
     // top image for photos
     if(imgSrc) {
         card += '<a href="' + itemHref + '"> <img class="card-img-top lazyload" src="' + placeholder + '" data-src="' + imgSrc + '" alt="Image of ' + obj.title + '"></a>';

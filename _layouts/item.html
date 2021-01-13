@@ -12,8 +12,10 @@ gallery: true
 
     <div class="row my-4">
 <div class="col-md-8">
-    <p class="h1">{{page.title}}</p>
-    <p class="h4 ml-5"><em>Organization: {{page.org | upcase }}</em></p>
+    <p class="h1 mb-4">{{page.title}}</p>
+    {% for org in site.data.orgs%}{% if page.org == org.title %}
+        <a href="browse.html#{{org.short}}" class="my-3  p-3"  alt="{{org.title}} logo link to browse page"><img class=" {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:60px;max-width: 200px;" alt="{{org.title}} logo"></a>
+        {%endif%}{%endfor%}
     
 </div>
 <div class="col-md-4 text-center mt-2">
@@ -79,38 +81,6 @@ gallery: true
                 </dl>
             </div>
         </div>
-    </div>
-
-    <div class="row justify-content-end mt-4">
-        <div class="col-md-5">
-            <div class="card mb-2">
-                <div class="card-header">Source</div>
-                <div class="card-body">
-                    <dl>
-                        <dt>Preferred Citation:</dt>
-                        <dd>"{{ page.title }}", {{ site.title }}, {{ site.organization-name }}</dd>
-                        <dt>Reference Link:</dt>
-                        <dd>{{ page.url | absolute_url }}</dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
-        {% if page.rights or page.rightsstatment %}
-        <div class="col-md-5">
-            <div class="card mb-2">
-                <div class="card-header">Rights</div>
-                <div class="card-body">
-                    <dl>
-                        {% if page.rights %}
-                        <dd>{{ page.rights }}</dd>{% endif %}
-                        {% if page.rightsstatement %}<dt>Standardized Rights:</dt>
-                        <dd><a target="_blank" rel="noopener" href="{{ page.rightsstatement }}">{{ page.rightsstatement }}</a>
-                        </dd>{% endif %}
-                    </dl>
-                </div>
-            </div>
-        </div>
-        {% endif %}
     </div>
 
     {%- if site.data.theme.browse-buttons == true -%}
