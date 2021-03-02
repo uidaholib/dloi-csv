@@ -1,9 +1,5 @@
-{%- assign gallery = site.data.gallery_images | where_exp: "item","item.label == page.title" | first -%}
-{% if gallery != nil %}
-{%- assign carousel-items = gallery.items | split: ";" -%}
-{%- assign carousel-titles = gallery.titles | split: ";" -%}
-{% elsif page.featured_image contains "/" %}
-{%- capture carousel-items-raw -%}0;1;2;3;4{% endcapture %}
+{% if page.image_gallery != nil %}
+{%- capture carousel-items-raw -%}{{page.image_gallery}}{% endcapture %}
 {%- assign carousel-items = carousel-items-raw | split: ";" -%}
 {% else %}
 {%- capture carousel-items-raw -%}{{page.featured_image | plus: 1}};{{page.featured_image | plus: 2}};{{page.featured_image | plus: 3}};{{page.featured_image | plus: 4}};{{page.featured_image | plus: 5}};{{page.featured_image | plus: 6}}{% endcapture %}
