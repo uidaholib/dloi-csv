@@ -7,6 +7,17 @@ layout: page
 
   {% include index/description.html %}
 
+  <div class="col-md-7">
+  <div id="map" style="max-height:500px"></div>
+</div>
+<div class="col-md-5">
+  {% include index/featured-terms.html field="ctrl_subcat" title="Main Subjects" btn-color="info" featured=site.data.theme.featured-subjects max=7 %}
+
+
+
+  {% include index/featured-terms.html field="material_type" title="Materials" btn-color="outline-secondary" max=7 %}
+
+</div>
   <h2 class="mt-5">Featuring Collections From:</h2>
  
   <div class="row my-5 ">
@@ -17,20 +28,14 @@ layout: page
   </div>
 </div>
 <div class="row"> 
-  <div class="col-md-8">
+  <div class="col-md-12">
 
     {% include index/carousel.html%}
     
   </div>
   <div class="col-md-4">  
 
-    {% include index/time.html %}
-
-    {% include index/featured-terms.html field="subject" title="Top Subjects" btn-color="info" featured=site.data.theme.featured-subjects max=site.data.theme.featured-subjects-max %}
-
-    {% include index/featured-terms.html field="location" title="Locations" btn-color="outline-secondary" featured=site.data.theme.featured-locations max=site.data.theme.featured-locations-max %}
     
-    {% include index/objects.html %}
 
   </div>
   <div class="col-md-12">

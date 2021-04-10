@@ -1,0 +1,142 @@
+%- assign items = site.data[site.metadata] | where_exp: 'item','item.latitude != nil and item.longitude != nil' -%}
+{%- assign fields = site.data.config-map -%}
+<!-- load leaflet dependencies -->
+<script src="{{ '/assets/lib/leaflet/leaflet.js' | absolute_url }}"></script>
+{% if site.data.theme.map-search == true %}<script src="{{ '/assets/lib/leaflet/fuse.min.js' | absolute_url }}"></script>
+<script src="{{ '/assets/lib/leaflet/leaflet.fusesearch.js' | absolute_url }}"></script>{% endif %}
+{% if site.data.theme.map-cluster == true %}<script src="{{ '/assets/lib/leaflet/leaflet.markercluster.js' | absolute_url }}"></script>{% endif %}
+{% if site.data.theme.map-search == true and site.data.theme.map-cluster == true %}<script src="{{ '/assets/lib/leaflet/leaflet.markercluster.freezable.js' | absolute_url }}"></script>{% endif %}
+
+
+<script type="text/javascript" src="{{'assets/data/counties.js' | relative_url }}"></script>
+<script type="text/javascript">
+
+var map = L.map('map').setView([45.427485,-115.014185],6);
+
+	L.tileLayer('', {
+		maxZoom: 18,
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
+
+
+    /* add map layer options */
+    var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+    });
+    var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
+        maxZoom: 16
+    });
+    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
+    var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+});
+var Esri_WorldTerrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+	maxZoom: 13
+});
+var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+	
+Esri_WorldTerrain.addTo(map);
+
+	// control that shows state info on hover
+	var info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+	info.update = function (props) {
+		this._div.innerHTML = '' +  (props ?
+			'<b>' + props.name + ' County </b><br />' + props.number + ' Collections'
+			: '');
+	};
+
+	info.addTo(map);
+
+	// get color depending on population density value
+	function getColor(d) {
+		return d > 40 ? '#800026' :
+				d > 20  ? '#BD0026' :
+				d > 16  ? '#E31A1C' :
+				d > 12  ? '#FC4E2A' :
+				d > 8   ? '#FD8D3C' :
+				d > 4   ? '#FEB24C' :
+				d > 2   ? '#FED976' :
+							'#FFEDA0';
+	}
+
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.number)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function browseToFeature(e) {
+		window.location.assign('{{ site.baseurl }}/browse.html#' + e);
+	}
+
+	
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight
+    });
+	layer.on('click', function () {
+		browseToFeature(feature.properties.name);
+   });
+}
+
+
+
+geojson = L.geoJson(countyData, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+
+
+	
+</script>
