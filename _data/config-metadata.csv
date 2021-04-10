@@ -2,12 +2,12 @@ field,display_name,browse_link,dc_map,schema_map
 creator,Creator,,DCTERMS.creator,creator
 date-range,Date Range,,,
 description,Description,,DCTERMS.description,description
-subject,Subjects,true,DCTERMS.subject,keywords
-location,Location,,,contentLocation
-latitude,Latitude
-longitude,Longitude
+ctrl_subcat,Main Subject,true,DCTERMS.subject,keywords
+ctrl_subject,Subjects,true,DCTERMS.subject,keywords
+material_type,Material Type,true,true
+region,Region,true,
+county,County,true,,contentLocation
+location,Location,true,,contentLocation
 source,Source
 identifier,Source Identifier
-type,Type,,DCTERMS.type
-format,Format,,,encodingFormat
 rightsstatement,,,DCTERMS.rights,license

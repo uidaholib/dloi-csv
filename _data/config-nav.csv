@@ -3,7 +3,9 @@ Home,/,
 Browse,/browse.html,
 Subjects,/subjects.html,
 Locations,/locations.html,
-Map,/map.html,
+Maps,,
+County Map,/maps/counties.html,Maps
+Coordinates,/map.html,Maps
 Timeline,/timeline.html,
 Data,/data/,
 About,/about.html,

@@ -2,7 +2,10 @@ field,display_name,btn,hidden,sort_name
 org,,,true,Organization
 shortorg,Org,true,,
 date-range,Date,,,Date
-description,,,
-subject,,,true
+ctrl_subcat,,,true
+material_type,,,true
+ctrl-subject,,,true
+region,,,true
+county,,,true
 location,,,true
 
