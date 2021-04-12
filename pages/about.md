@@ -8,22 +8,29 @@ permalink: /about.html
 
 {% include feature/jumbotron.html %} 
 
-{% include feature/nav-menu.html sections="About CollectionBuilder SA" %}
+{% include feature/nav-menu.html sections="Overview;Add Your Collection;Future Directions" %}
 
-## About CollectionBuilder SA
+## Overview
 
-This demo collection features items from the University of Idaho Library's [Digital Collections](https://www.lib.uidaho.edu/digital/), and is build using [CollectionBuilder-SA](https://github.com/CollectionBuilder/collectionbuilder-sa).
+The Digital Library of Idaho (DLOI) is a collection of digital libraries from across the state of Idaho, providing access points to the varied historical images, documents, and other media available to the public. This "collection of collections" was developed over the course of the 2020-2021 academic year by a board of directors drawn from librarians from the University of Idaho, Boise State University, Idaho State University and the Idaho Commission for Libraries. The site currently features over 150 collections from 6 organizations from across the state that can be searched and browsed by subject matter, material type, date range, and location. 
 
-CollectionBuilder-SA is a "Stand Alone" template for creating digital collection and exhibit websites using Jekyll, given:
+The Digital Library of Idaho is the first initiative of the Network of Idaho Academic Libraries (NIAL), which seeks to increase the statewide impact of higher education by facilitating and strengthening collaboration and communication among Idaho’s academic libraries.
 
-- a CSV of collection metadata
-- a folder of images, PDFs, audio, or video files
+## Add Your Collection
 
-Driven by your collection metadata, the template generates engaging visualizations to browse and explore your objects.
-The resulting static site can be hosted on any basic web server.
+We encourage any Idaho organization that is interested in adding a digital collection to the site to reach out to us by filling out the below form or emailing Devin Becker at dbecker@uidaho.edu. Once contacted, we will reach out to you regarding the specific forms and information you need to fill out to include your collection here.
 
-[CollectionBuilder](https://github.com/CollectionBuilder/) is an set of open source tools for creating digital collection and exhibit websites that are driven by metadata and powered by modern static web technology.
-See [Getting Started Docs](https://collectionbuilder.github.io/docs/introduction.html) for detailed information.
+## Future Directions
 
+DLoI is currently a collection of collections, and the founding board members believe that focusing on collections and their importance to the state should be an ongoing principle of the organization. We also intend to expand the sites capacity to include aggregated item information from each collection as well. This will enable further advancements and features, including cross-state search functions, machine readable data formats, and improved ability to discover, teach, build, and create additional resources and expressions from the collections and their items. 
 
-{% include feature/item-figure.html objectid="demo_001" width="75" %} 
+### Board of Directors 
+
+- Devin Becker (chair)
+- Allison Floyd
+- Tania Harden
+- Cheryl Oestricher
+- Ellen Ryan
+- Elisabeth Shook
+- Olivia Wikle
+- Evan Williamson
