@@ -1,7 +1,6 @@
 field,display_name,browse_link,dc_map,schema_map
 creator,Creator,,DCTERMS.creator,creator
 date-range,Date Range,,,
-description,Description,,DCTERMS.description,description
 ctrl_subcat,Main Subject,true,DCTERMS.subject,keywords
 ctrl_subject,Subjects,true,DCTERMS.subject,keywords
 material_type,Material Type,true,true

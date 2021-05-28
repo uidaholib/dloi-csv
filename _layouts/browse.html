@@ -38,8 +38,8 @@ layout: page
 </div>
 <div class="container-fluid">
 <div class="row">
-<div class="hidden-xs col-md-3">
-    <div class="accordion sticky-top" id="accordionExample">
+<div class="d-none d-md-block col-md-3">
+    <div class="accordion sticky-top mb-4" id="accordionExample">
         <div class="card">
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
@@ -108,7 +108,7 @@ layout: page
             <div class="card-body">
               <ul>
                 {% for org in site.data.orgs %}
-                <li class="my-1 small"><a href="#{{org.short}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
+                <li class="my-1 small"><a href="#{{org.title}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -116,7 +116,7 @@ layout: page
         </div>
       </div>
 </div>
-    <div class="cold-12 col-md-9 pl-5">
+    <div class="col-12 col-md-9 pl-5">
 <div class="row" id="browseItems"></div>
     </div> 
 </div>

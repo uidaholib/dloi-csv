@@ -22,7 +22,7 @@ We encourage any Idaho organization that is interested in adding a digital colle
 
 ## Future Directions
 
-DLoI is currently a collection of collections, and the founding board members believe that focusing on collections and their importance to the state should be an ongoing principle of the organization. We also intend to expand the sites capacity to include aggregated item information from each collection as well. This will enable further advancements and features, including cross-state search functions, machine readable data formats, and improved ability to discover, teach, build, and create additional resources and expressions from the collections and their items. 
+DLoI is currently a collection of collections, and the founding board members believe that focusing on collections and their importance to the state should be an ongoing principle of the organization. We also intend to expand the site's capacity to include aggregated item information from each collection as well. This will enable further advancements and features, including cross-state search functions, machine readable data formats, and improved ability to discover, teach, build, and create additional resources and expressions from the collections and their items. 
 
 ### Board of Directors 
 

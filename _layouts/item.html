@@ -10,25 +10,27 @@ gallery: true
         <li class="breadcrumb-item active">{{ page.title | truncatewords: 10 }}</li>
     </ul>
 
-    <div class="row my-4">
-<div class="col-md-8">
-    <p class="h1 mb-4">{{page.title}}</p>
-    {% for org in site.data.orgs%}{% if page.org == org.title %}
-        <a href="{{org.short | prepend: '/browse.html#' | relative_url}}" class="my-3  p-3"  alt="{{org.title}} logo link to browse page"><img class=" {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:60px;max-width: 200px;" alt="{{org.title}} logo"></a>
-        {%endif%}{%endfor%}
-    
+    <div class="row mt-2 mb-1">
+<div class="col-md-9">
+    <h1 class="h1 mb-4"><a class="text-dark" href="{{ page.download }}" target="_blank">{{page.title}}</a></h1>    
 </div>
-<div class="col-md-4 text-center mt-2">
-    <a class="btn btn-lg btn-outline-success" href="{{ page.download }}" target="_blank">Go to Collection {% include icon.html filename="box-arrow-up-right" size="18" class="pb-3"%}</a>
+<div class="col-md-3 mb-2 text-right">
+    <a class="btn btn-outline-success" href="{{ page.download }}" target="_blank">Go to Collection {% include icon.html filename="box-arrow-up-right" size="18" class="pb-3"%}</a>
   </div>
 </div>
   <div class="row">
         <div class="col-md-8" id="lightgallery">
             <div class="card mb-4 text-center">
                 {% if page.format contains 'image' %}
-               
-                    {% include index/itemcarousel.html %}
-               
+                <div class="row">
+                    <div class="col-md-12">
+                        <div >
+                            <div>
+                                <p><a target="_blank" href="{{page.collectionid}}"><img src="{{ page.img_small | relative_url }}" alt="item thumbnail for {{ page.title | escape }} | Click to go to collection" class="img-fluid"></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {%- else -%}
                 <div class="mt-4">
                     <p>
@@ -50,15 +52,22 @@ gallery: true
                     </p>
                 </div>
                 {%- endif -%}
-                <div class="my-2">
-                    {% if page.youtubeid %}
-                    <a target="_blank" rel="noopener" href="https://youtu.be/{{ page.youtubeid }}" class="btn btn-outline-info">View on YouTube</a>
-                    {% else %}
-                    <a target="_blank" href="{{ page.download }}" class="btn btn-lg btn-outline-info">Go to Collection</a>{% endif %}
-                    {% if page.startdate %}{%- capture year -%}{% if page.startdate contains "-" %}{{ page.startdate | split: "-" | first }}{% elsif page.startdate contains "/" %}{{ page.startdate | split: "/" | last }}{% else %}{{ page.startdate }}{% endif %}{%- endcapture -%}
-                    <br/><br/><a href="{{ year | strip | prepend: '/timeline.html#' | relative_url }}" class="ml-2 btn btn-outline-info">View on Timeline</a>{% endif %}
+                <!--<div class="my-2">
+                    <div class="row">
+                    
+                </div>
+                </div>-->
+                <div class="d-flex justify-content-center mb-2">
+                   {% if page.startdate %}{%- capture year -%}{% if page.startdate contains "-" %}{{ page.startdate | split: "-" | first }}{% elsif page.startdate contains "/" %}{{ page.startdate | split: "/" | last }}{% else %}{{ page.startdate }}{% endif %}{%- endcapture -%}
+                    <a href="{{ year | strip | prepend: '/timeline.html#' | relative_url }}" class="mx-1 btn btn-outline-info">View on Timeline</a>{% endif %}
                     {% if page.latitude and page.longitude %}
-                    <br/><br/><a href="{{ '/map.html#' | append: page.latitude  | append: ',' | append: page.longitude | relative_url}}" class="ml-2 btn btn-outline-info">View on Map</a>{% endif %}
+                    <a href="{{ '/map.html#' | append: page.latitude  | append: ',' | append: page.longitude | relative_url}}" class="mx-1 btn btn-outline-info">View on Map</a>{% endif %}
+                </div>
+                <div class="d-flex justify-content-center">
+                <p class="col-9 text-justify">{{page.description}} </p>
+            </div>
+                <div class="d-flex justify-content-center">
+                <p class="text-center"><a href="{{page.download}}" target="_blank">Go to the collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}</a></p>
                 </div>
             </div>
         </div>
@@ -72,13 +81,23 @@ gallery: true
                         {% if f.browse_link == "true" %}
                         {% assign topics = page[f.field] | split: ";" %}
                         {% for t in topics %}
-                        <a class="mr-3" href="{{ t | strip | url_param_escape | prepend: '/browse.html#' | relative_url }}">{{ t | strip }}</a>
+                        <a class="m-1 btn btn-outline-secondary" href="{{ t | strip | url_param_escape | prepend: '/browse.html#' | relative_url }}">{{ t | strip }}</a>
                         {% endfor %}
                         {% else %}
                         {{ page[f.field] | replace: '""','"' }}{% endif %}
                     </dd>
                     {% endif %}{% endfor %}
                 </dl>
+               
+               
+                {% for org in site.data.orgs%}{% if page.org == org.title %}
+                <div class=" my-3">
+                    <dt class="field mb-3">Collection Steward:</dt>
+                    <dd>
+        <a href="{{org.short | prepend: '/browse.html#' | relative_url}}" alt="{{org.title}} logo link to browse page" ><img {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:60px;max-width: 200px;" alt="{{org.title}} logo"></a>
+    </dd>
+                </div>
+        {%endif%}{%endfor%}
             </div>
         </div>
     </div>
