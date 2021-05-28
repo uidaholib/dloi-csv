@@ -50,10 +50,11 @@ layout: page
           </div>
       
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-            <div class="card-body">
+            <div class="card-body">{% assign mapped_regions = site.data[site.metadata] | map: "region" | compact | uniq %}{% capture included_regions %}{% for r in mapped_regions %}{{r}} {% endfor %}{% endcapture %}
               <ul>
-                {% for region in site.data.regions%}
+                {% for region in site.data.regions%}{% if included_regions contains region.title %}
                 <li class="my-1 small"><a href="#{{region.title}}" class="text-dark">{{region.title}}</a></li>
+                {% endif %}
                 {% endfor %}
               </ul>
             </div>
@@ -68,10 +69,11 @@ layout: page
             </h2>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body">
+            <div class="card-body">{% assign mapped_subs = site.data[site.metadata] | map: "ctrl_subcat" | compact | uniq %}{% capture included_subs %}{% for s in mapped_subs %}{{s}} {% endfor %}{% endcapture %}
                 <ul>
-                    {% for subject in site.data.subjects%}
+                    {% for subject in site.data.subjects%}{% if included_subs contains subject.title %}
                     <li class="my-1 small"><a href="#{{subject.title}}"  class="text-dark">{{subject.title}}</a></li>
+                    {% endif %}
                     {% endfor %}
                   </ul>
             </div>
@@ -86,10 +88,11 @@ layout: page
             </h2>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body">
+            <div class="card-body">{% assign mapped_types = site.data[site.metadata] | map: "material_type" | compact | uniq %}{% capture included_types %}{% for t in mapped_types %}{{t}} {% endfor %}{% endcapture %}
                 <ul>
-                    {% for type in site.data.types%}
+                    {% for type in site.data.types%}{% if included_types contains type.title %}
                     <li class="my-1 small"><a href="#{{type.title}}"  class="text-dark">{{type.title}}</a></li>
+                    {% endif %}
                     {% endfor %}
                   </ul>
             </div>
