@@ -94,7 +94,7 @@ gallery: true
                 <div class=" my-3">
                     <dt class="field mb-3">Collection Steward:</dt>
                     <dd>
-        <a href="{{org.short | prepend: '/browse.html#' | relative_url}}" alt="{{org.title}} logo link to browse page" ><img {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:60px;max-width: 200px;" alt="{{org.title}} logo"></a>
+        <a href="{{org.title | prepend: '/browse.html#' | relative_url}}" alt="{{org.title}} logo link to filtered browse page" ><img {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:60px;max-width: 200px;" alt="{{org.title}} logo"></a>
     </dd>
                 </div>
         {%endif%}{%endfor%}
