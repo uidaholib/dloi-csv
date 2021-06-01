@@ -99,7 +99,7 @@ function objectPopups(feature, layer) {
         /* create pop up */
         var itemHref = '{{ site.baseurl }}/browse.html#' + feature.properties.name;
         var popupTemplate = '<h4><a class="text-dark" href="' + itemHref + '">' +
-            feature.properties.name + ' County</a></h4><div class="collections-list"><p>' + feature.properties.collections;
+            feature.properties.name + ' </a></h4><div class="collections-list"><p>' + feature.properties.collections;
         popupTemplate += '</p><div class="text-center"><a class="btn btn-light" href="' + itemHref + '" >View All ' + feature.properties.number + ' Collections</a></div>';
         layer.bindPopup(popupTemplate);
         layer.on({
