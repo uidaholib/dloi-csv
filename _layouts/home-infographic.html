@@ -22,7 +22,7 @@ layout: page
  
   <div class="row my-5 ">
     {% for org in site.data.orgs%}
-  <a href="browse.html#{{org.short}}" class="m-3 text-center col-xs-12 col-md-3 p-3"  ><img class=" {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:80px;" title="{{org.title}} logo"></a>
+  <a href="browse.html#{{org.title}}" class="m-3 text-center col-xs-12 col-md-3 p-3"  ><img class=" {%if org.img == 'isa.png' or org.img == 'isu.png'%}bg-dark p-2 {% endif %}"  src="/assets/img/logos/{{org.img}}" style="max-height:80px;" title="{{org.title}} logo"></a>
   {%endfor%}
 
   </div>
