@@ -5,8 +5,26 @@
 }
 
 
-/* Date Range Slider from Joost van der Schee at https://codepen.io/joosts/pen/rNLdxvK*/
+.navbar-dark .navbar-nav .nav-link {
 
+    color: white !important;
+
+}
+
+
+element {
+
+}
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
+
+    color: #fff;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+
+}
+/* Date Range Slider from Joost van der Schee at https://codepen.io/joosts/pen/rNLdxvK*/
+.vizdiv{  transition: visibility 0s, opacity 0.5s linear;}
+.vizdiv:hover{ background-color: rgba(206, 109, 109, 0.05) !important;}
 
 .min-max-slider {position: relative; width: 100%; text-align: center; margin-bottom: 50px;}
 .min-max-slider > label {display: none;}
@@ -41,6 +59,10 @@ span.value.upper::before {content: "- "; display: inline-block; margin-left: 0.4
     background: #04AA6D;
     border-radius: 2%;
     cursor: pointer;
+    content: "<span class='lower value'>";
   }
 .min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
  
+.hidden-range {
+    display: none;
+}

@@ -22,24 +22,28 @@ layout: page
     <h3>Date Range for Collections {{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
     <p>Use slider to limit collections to specific date range.</p>
     <div class="min-max-slider" data-legendnum="2">
-        <label for="min">Minimum price</label>
+        <label for="min">Minimum year</label>
         <input id="min" class="min" name="min" type="range" step="1" min="{{ beginning }}" max="{{ end }}" />
-        <label for="max">Maximum price</label>
+        <label for="max">Maximum year</label>
         <input id="max" class="max" name="max" type="range"  min="{{ beginning }}" max="{{ end }}" />
     </div>
     {%- assign items = items | sort: "startdate"  -%}
     {% for item in items %}{% if item.startdate and item.enddate %}
     {% assign bar_width = item.enddate | minus: item.startdate | times: 1.0  %}
-    {% assign bar_width = bar_width | divided_by: total_years %}
+    {% assign bar_width_ratio = bar_width | divided_by: total_years %}
   {% assign bar_start = item.startdate | minus: beginning | times: 1.0 %}
-  {% assign bar_start =  bar_start | divided_by: total_years  %}
-  <div class="vizdiv {% cycle "bg-light", "bg-white" %} pb-2" data-start="{{item.startdate}}" data-end="{{item.enddate}}" data-title="{{item.objectid}}">
-    <p x="0" y="0" data-id="{{item.objectid}}" class="mt-3 pl-2"><a href="/items/{{item.objectid}}.html">{{ item.title }}} | {{item.date-range}}</a></p>
+  {% assign bar_start_ratio =  bar_start | divided_by: total_years  %}
+  {% assign bar_end =  bar_start | plus: bar_width | divided_by: total_years  %}
+  <a href="/items/{{item.objectid}}.html" ><div class="vizdiv border pb-2" data-start="{{item.startdate}}" data-end="{{item.enddate}}" data-title="{{item.objectid}}">
+    <p x="0" y="0" data-id="{{item.objectid}}" class="mt-3 pl-2">{{ item.title }} </p>
     <svg class="chart {{item.objectid}}" width="100%" height="20px" style="overflow:visible">
        
-      <a href="/items/{{item.objectid}}.html" ><rect x="{{bar_start | times: 100}}%" y="0" width="{{bar_width | times: 100}}%" height="15" data-toggle="tooltip" data-placement="top" class="text-info" title="{{ item.title }}} | {{item.date-range}}" ></rect></a>
+      <rect x="{{bar_start_ratio | times: 100}}%" y="0" width="{{bar_width_ratio | times: 100}}%" height="20" title="{{ item.title }}} | {{item.date-range}}" fill="#666" ></rect>
+        <text x="{{bar_start_ratio | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="end">{{item.startdate}} </text>
+        <text x="{{bar_end | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="start"> {{item.enddate}}</text></a>
+    
       </svg>
-  </div>
+  </div></a>
   {% endif %}{%endfor%}
 
 
@@ -150,18 +154,16 @@ function update(el){
         var rangemax = range.getAttribute("data-end");
         var rangeobject = range.getAttribute("data-title");
         if (minvalue > rangemin) {
-            range.style.display = "none";
-            console.log("dissappers" + rangeobject);
-        }
+            range.classList.add("hidden-range");
+          }
         else if (minvalue < rangemin) {
-            range.style.display = "block";
+            range.classList.remove("hidden-range");        
         };
         if (maxvalue < rangemax) {
-            range.style.display = "none";
-            console.log("dissappers" + rangeobject);
+            range.classList.add("hidden-range");
         }
         else if (maxvalue < rangemax) {
-            range.style.display = "block";
+            range.classList.remove("hidden-range");  
         };
 
 
