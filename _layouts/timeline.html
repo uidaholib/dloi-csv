@@ -1,9 +1,9 @@
 ---
 layout: page
 ---
-{%- assign items = site.data[site.metadata] -%}
-{%- assign raw-dates = site.data[site.metadata] | map: 'startdate' | compact | uniq -%}
-{%- capture clean-years -%}{% for date in raw-dates %}{% if date contains "-" %}{{ date | strip | split: "-" | first }}{% elsif date contains "/" %}{{ date | strip | split: "/" | last }}{% else %}{{ date | strip }}{% endif %}{% unless forloop.last %};{% endunless %}{%- endfor -%}{%- endcapture -%}
+{%- assign items = site.data[site.metadata]  -%}
+{%- assign raw-dates = site.data[site.metadata] | map: 'date-range' | compact | uniq  -%}
+{%- capture clean-years -%}{% for date in raw-dates %}{% if date contains "-" %}{{ date | strip | split: "-" | first }};{{ date | strip | split: "-" | last }}{% elsif date contains "/" %}{{ date | strip | split: "/" | last }}{% else %}{{ date | strip }}{% endif %}{% unless forloop.last %};{% endunless %}{%- endfor -%}{%- endcapture -%}
 {%- assign uniqueYears = clean-years | remove: " " | split: ";" | uniq | sort -%}
 {%- if site.data.theme.year-navigation -%}
 {%- assign navYears = site.data.theme.year-navigation | split: ";" -%}
@@ -13,47 +13,27 @@ layout: page
 {%- if t == 0 -%}{{ i }}{% unless forloop.last %};{% endunless %}{% endif %}{% endfor %}{%- endcapture -%}
 {%- assign navYears = navYears | split: ";" -%}
 {%- endif -%}
-<div class="dropdown float-right" id="year-nav">
-    <button class="btn btn-info dropdown-toggle" type="button" id="yearButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Year
-    </button>
-    <div class="dropdown-menu" aria-labelledby="yearButton">
-        {% for y in navYears %}
-        <a class="dropdown-item" href="#{{ y }}">{{ y }}</a>{% endfor %}
-    </div>
-</div>
 
-{{ content }}
+{% assign beginning = uniqueYears | first | times: 1 %}
+{% assign end = uniqueYears | last | times: 1  %}
+{% assign total_height = end | minus: beginning  %}
+  <div class="vizdiv" >
+    {{ content }}
 
-<h3><a href="#{{ uniqueYears | first }}">{{ uniqueYears | first }}</a> to <a href="#{{ uniqueYears | last }}">{{ uniqueYears | last }}</a></h3>
+    <h3>{{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
+    
+    {%- assign items = items | sort: "startdate"  -%}
 
-<table id="timeline" class="table table-striped">
-    {% for year in uniqueYears %}
-    <tr id="{{ year }}">
-        <th>
-            <h3>{{ year }}</h3>
-        </th>
-        <td><div class="row">
-                {%- assign inYear = items | where_exp: 'item', 'item.startdate contains year' -%}
-                {% for item in inYear %}
-                <div class="col-lg-4 col-md-6">
-                    <a href="{{ '/items/' | absolute_url | append: item.objectid | append: '.html' }}" >
-                        {% if item.youtubeid %}
-                        <img class="lazyload img-thumbnail" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ 'https://img.youtube.com/vi/' | append: item.youtubeid | append: '/hqdefault.jpg' | relative_url }}" alt="{{ item.title | escape }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.title | escape }} | {{ item.date | escape }}">
-                        {% elsif item.format contains 'video' or item.format contains 'audio' %}
-                        <div class="card"> 
-                            <div class="card-body text-center">
-                                <h5 class="card-title text-dark">{{ item.title }}</h5>
-                                <img class="lazyload img-thumbnail w-50" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{% if item.format contains 'audio' %}{{ '/assets/img/audio.svg' | relative_url }}{% else %}{{ '/assets/img/video.svg' | relative_url }}{% endif %}" alt="{% if item.format contains 'audio' %}audio{% else %}PDF{% endif %} filetype thumbnail">
-                            </div>
-                        </div>
-                        {% else %}
-                        <img class="lazyload img-thumbnail" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="{{ item.img_thumb }}" alt="{{ item.title | escape }}" data-toggle="tooltip" data-placement="bottom" title="{{ item.title | escape }} | {{ item.date | escape }}">
-                        {% endif %}
-                    </a>
-                </div>
-                {% endfor %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <svg class="chart {{item.objectid}}" width="100%" height="3400px" style="overflow:scroll">
+        {% for item in items %}{% if item.startdate and item.enddate %}
+        {% assign height = item.enddate | minus: item.startdate | times: 1.0  %}
+        {% assign height = height | divided_by: total_height  %}
+      {% assign vertical_start = item.startdate | minus: beginning | times: 1.0 %}
+      {% assign vertical_start =  vertical_start | divided_by: total_height   %}
+
+      <a href="/items/{{item.objectid}}.html"><rect x="{{vertical_start | times: 100}}%" y="{{ forloop.index | times: 20 | minus: 800}}px" width="{{height | times: 100}}%" height="15" data-toggle="tooltip" data-placement="top" class="text-info" title="{{ item.title }}} | {{item.date-range}} {{navyears.startdate}}" ></rect></a>
+      {% endif %}{%endfor%}</svg>
+  </div>
+
+
+
