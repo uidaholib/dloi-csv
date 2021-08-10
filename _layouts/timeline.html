@@ -1,5 +1,6 @@
 ---
 layout: page
+
 ---
 {%- assign items = site.data[site.metadata]  -%}
 {%- assign raw-dates = site.data[site.metadata] | map: 'date-range' | compact | uniq  -%}
@@ -16,24 +17,173 @@ layout: page
 
 {% assign beginning = uniqueYears | first | times: 1 %}
 {% assign end = uniqueYears | last | times: 1  %}
-{% assign total_height = end | minus: beginning  %}
-  <div class="vizdiv" >
-    {{ content }}
-
-    <h3>{{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
-    
+{% assign total_years = end | minus: beginning  %}
+  
+    <h3>Date Range for Collections {{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
+    <p>Use slider to limit collections to specific date range.</p>
+    <div class="min-max-slider" data-legendnum="2">
+        <label for="min">Minimum price</label>
+        <input id="min" class="min" name="min" type="range" step="1" min="{{ beginning }}" max="{{ end }}" />
+        <label for="max">Maximum price</label>
+        <input id="max" class="max" name="max" type="range"  min="{{ beginning }}" max="{{ end }}" />
+    </div>
     {%- assign items = items | sort: "startdate"  -%}
-
-    <svg class="chart {{item.objectid}}" width="100%" height="3400px" style="overflow:scroll">
-        {% for item in items %}{% if item.startdate and item.enddate %}
-        {% assign height = item.enddate | minus: item.startdate | times: 1.0  %}
-        {% assign height = height | divided_by: total_height  %}
-      {% assign vertical_start = item.startdate | minus: beginning | times: 1.0 %}
-      {% assign vertical_start =  vertical_start | divided_by: total_height   %}
-
-      <a href="/items/{{item.objectid}}.html"><rect x="{{vertical_start | times: 100}}%" y="{{ forloop.index | times: 20 | minus: 800}}px" width="{{height | times: 100}}%" height="15" data-toggle="tooltip" data-placement="top" class="text-info" title="{{ item.title }}} | {{item.date-range}} {{navyears.startdate}}" ></rect></a>
-      {% endif %}{%endfor%}</svg>
+    {% for item in items %}{% if item.startdate and item.enddate %}
+    {% assign bar_width = item.enddate | minus: item.startdate | times: 1.0  %}
+    {% assign bar_width = bar_width | divided_by: total_years %}
+  {% assign bar_start = item.startdate | minus: beginning | times: 1.0 %}
+  {% assign bar_start =  bar_start | divided_by: total_years  %}
+  <div class="vizdiv {% cycle "bg-light", "bg-white" %} pb-2" data-start="{{item.startdate}}" data-end="{{item.enddate}}" data-title="{{item.objectid}}">
+    <p x="0" y="0" data-id="{{item.objectid}}" class="mt-3 pl-2"><a href="/items/{{item.objectid}}.html">{{ item.title }}} | {{item.date-range}}</a></p>
+    <svg class="chart {{item.objectid}}" width="100%" height="20px" style="overflow:visible">
+       
+      <a href="/items/{{item.objectid}}.html" ><rect x="{{bar_start | times: 100}}%" y="0" width="{{bar_width | times: 100}}%" height="15" data-toggle="tooltip" data-placement="top" class="text-info" title="{{ item.title }}} | {{item.date-range}}" ></rect></a>
+      </svg>
   </div>
+  {% endif %}{%endfor%}
+
+
+<script>
+    var thumbsize = 14;
+
+function draw(slider,splitvalue) {
+
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var lower = slider.querySelector('.lower');
+    var upper = slider.querySelector('.upper');
+    var legend = slider.querySelector('.legend');
+    var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
+    var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
+    var rangemin = parseInt(slider.getAttribute('data-rangemin'));
+    var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+
+    /* set min and max attributes */
+    min.setAttribute('max',splitvalue);
+    max.setAttribute('min',splitvalue);
+
+    /* set css */
+    min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+    min.style.left = '0px';
+    max.style.left = parseInt(min.style.width)+'px';
+    min.style.top = lower.offsetHeight+'px';
+    max.style.top = lower.offsetHeight+'px';
+    legend.style.marginTop = min.offsetHeight+'px';
+    slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
+    
+    /* correct for 1 off at the end */
+    if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+
+    /* write value and labels */
+    max.value = max.getAttribute('data-value'); 
+    min.value = min.getAttribute('data-value');
+    lower.innerHTML = min.getAttribute('data-value');
+    upper.innerHTML = max.getAttribute('data-value');
+
+}
+
+function init(slider) {
+    /* set function vars */
+    var min = slider.querySelector('.min');
+    var max = slider.querySelector('.max');
+    var rangemin = parseInt(min.getAttribute('min'));
+    var rangemax = parseInt(max.getAttribute('max'));
+    var avgvalue = (rangemin + rangemax)/2;
+    var legendnum = slider.getAttribute('data-legendnum');
+
+    /* set data-values */
+    min.setAttribute('data-value',rangemin);
+    max.setAttribute('data-value',rangemax);
+    
+    /* set data vars */
+    slider.setAttribute('data-rangemin',rangemin); 
+    slider.setAttribute('data-rangemax',rangemax); 
+    slider.setAttribute('data-thumbsize',thumbsize); 
+    slider.setAttribute('data-rangewidth',slider.offsetWidth);
+
+    /* write labels */
+    var lower = document.createElement('span');
+    var upper = document.createElement('span');
+    lower.classList.add('lower','value');
+    upper.classList.add('upper','value');
+    lower.appendChild(document.createTextNode(rangemin));
+    upper.appendChild(document.createTextNode(rangemax));
+    slider.insertBefore(lower,min.previousElementSibling);
+    slider.insertBefore(upper,min.previousElementSibling);
+    
+    /* write legend */
+    var legend = document.createElement('div');
+    legend.classList.add('legend');
+    var legendvalues = [];
+    for (var i = 0; i < legendnum; i++) {
+        legendvalues[i] = document.createElement('div');
+        var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
+        legendvalues[i].appendChild(document.createTextNode(val));
+        legend.appendChild(legendvalues[i]);
+
+    } 
+    slider.appendChild(legend);
+
+    /* draw */
+    draw(slider,avgvalue);
+
+    /* events */
+    min.addEventListener("input", function() {update(min);});
+    max.addEventListener("input", function() {update(max);});
+}
+
+function update(el){
+    /* set function vars */
+    var slider = el.parentElement;
+    var min = slider.querySelector('#min');
+    var max = slider.querySelector('#max');
+    var minvalue = Math.floor(min.value);
+    var maxvalue = Math.floor(max.value);
+   
+    var ranges, i;
+  ranges = document.querySelectorAll(".vizdiv");
+  for (i = 0; i < ranges.length; i++) {
+      var range = ranges[i];
+    var rangemin = range.getAttribute("data-start");
+        var rangemax = range.getAttribute("data-end");
+        var rangeobject = range.getAttribute("data-title");
+        if (minvalue > rangemin) {
+            range.style.display = "none";
+            console.log("dissappers" + rangeobject);
+        }
+        else if (minvalue < rangemin) {
+            range.style.display = "block";
+        };
+        if (maxvalue < rangemax) {
+            range.style.display = "none";
+            console.log("dissappers" + rangeobject);
+        }
+        else if (maxvalue < rangemax) {
+            range.style.display = "block";
+        };
+
+
+  }
+    
+        
+
+
+    /* set inactive values before draw */
+    min.setAttribute('data-value',minvalue);
+    max.setAttribute('data-value',maxvalue);
+
+    var avgvalue = (minvalue + maxvalue)/2;
+
+    /* draw */
+    draw(slider,avgvalue);
+}
 
 
 
+var sliders = document.querySelectorAll('.min-max-slider');
+sliders.forEach( function(slider) {
+    init(slider);
+});
+</script>

@@ -3,3 +3,44 @@
 .item{
     font-size: smaller;
 }
+
+
+/* Date Range Slider from Joost van der Schee at https://codepen.io/joosts/pen/rNLdxvK*/
+
+
+.min-max-slider {position: relative; width: 100%; text-align: center; margin-bottom: 50px;}
+.min-max-slider > label {display: none;}
+span.value {height: 2em; font-weight: bold; display: inline-block;}
+span.value.lower::before {content: ""; display: inline-block;}
+span.value.upper::before {content: "- "; display: inline-block; margin-left: 0.4em;}
+.min-max-slider > .legend {display: flex; justify-content: space-between;}
+.min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
+.min-max-slider > input {cursor: pointer; position: absolute;}
+
+/* webkit specific styling */
+.min-max-slider > input {
+  -webkit-appearance: none;
+  outline: none!important;
+  background: transparent;
+  background-image: linear-gradient(to bottom, transparent 0%, transparent 30%, silver 30%, silver 60%, transparent 60%, transparent 100%);
+}
+.min-max-slider > input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    border-radius: 2%;
+    cursor: pointer;
+  }
+  .min-max-slider > input::-moz-range-thumb  {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    border-radius: 2%;
+    cursor: pointer;
+  }
+.min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
+ 
