@@ -153,7 +153,16 @@ function update(el){
     var rangemin = range.getAttribute("data-start");
         var rangemax = range.getAttribute("data-end");
         var rangeobject = range.getAttribute("data-title");
-        if (minvalue > rangemin) {
+        /*This code limits the ranges to anything with any range within the parameters -- so lots more ranges */
+        if (minvalue > rangemax || maxvalue < rangemin ) {
+            range.classList.add("hidden-range");
+          }
+        else {
+            range.classList.remove("hidden-range");        
+        };
+        
+        /* The code below will limit to just the ranges within the option -- in some ways this is better but maybe less intuitive to a user */
+       /* if (minvalue > rangemin) {
             range.classList.add("hidden-range");
           }
         else if (minvalue < rangemin) {
@@ -164,7 +173,7 @@ function update(el){
         }
         else if (maxvalue < rangemax) {
             range.classList.remove("hidden-range");  
-        };
+        };*/
 
 
   }
