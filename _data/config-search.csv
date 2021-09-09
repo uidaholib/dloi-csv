@@ -1,7 +1,6 @@
 field,index,display
 title,true,true
-date,true,true
-creator,true,false
+org,false,true
 description,true,true
-subject,true,true
+subject_free,true,true
 location,true,false
