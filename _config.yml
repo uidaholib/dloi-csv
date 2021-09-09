@@ -12,7 +12,7 @@ url:
 # path to location on the domain if necessary e.g. /digital/hjccc
 baseurl: 
 # location of code, the full url to your github repository
-source-code: https://github.com/dcnb/dloi
+source-code: https://github.com/uidaholib/dloi-csv
 
 ##########
 # SITE SETTINGS
