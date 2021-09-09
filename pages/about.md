@@ -6,7 +6,7 @@ permalink: /about.html
 # Look in _includes/feature for options to easily add features to the page
 ---
 
-{% include feature/jumbotron.html %} 
+{% include feature/jumbotron.html objectid="https://cdm15948.contentdm.oclc.org/digital/iiif/p15948coll13/91/full/max/0/default.jpg" %} 
 
 {% include feature/nav-menu.html sections="Overview;Add Your Collection;Future Directions" %}
 
