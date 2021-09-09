@@ -21,7 +21,7 @@ layout: page
   
     <h3>Date Range for Collections {{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
     <p>Use slider to limit collections to specific date range.</p>
-    <div class="min-max-slider" data-legendnum="2">
+    <div class="min-max-slider sticky-top" data-legendnum="2" >
         <label for="min">Minimum year</label>
         <input id="min" class="min" name="min" type="range" step="1" min="{{ beginning }}" max="{{ end }}" />
         <label for="max">Maximum year</label>
@@ -40,7 +40,7 @@ layout: page
        
       <rect x="{{bar_start_ratio | times: 100}}%" y="0" width="{{bar_width_ratio | times: 100}}%" height="20" title="{{ item.title }}} | {{item.date-range}}" fill="#666" ></rect>
         <text x="{{bar_start_ratio | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="end">{{item.startdate}} </text>
-        <text x="{{bar_end | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="start"> {{item.enddate}}</text></a>
+        {% unless item.startdate == item.enddate %}<text x="{{bar_end | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="start" class="pl-3"> {{item.enddate}}</text>{% endunless %}
     
       </svg>
   </div></a>
