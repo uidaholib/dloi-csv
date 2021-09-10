@@ -1,6 +1,11 @@
 field,index,display
 title,true,true
 org,false,true
+date-range,true,true
 description,true,true
-subject_free,true,true
+ctrl_subcat,true,true
+material_type,true,true
+ctrl_subject,true,false
 location,true,false
+region,true,false
+county,true,false
