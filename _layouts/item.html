@@ -57,17 +57,17 @@ gallery: true
                     
                 </div>
                 </div>-->
-                <div class="d-flex justify-content-center mb-2">
+                <!--<div class="d-flex justify-content-center mb-2">
                    {% if page.startdate %}{%- capture year -%}{% if page.startdate contains "-" %}{{ page.startdate | split: "-" | first }}{% elsif page.startdate contains "/" %}{{ page.startdate | split: "/" | last }}{% else %}{{ page.startdate }}{% endif %}{%- endcapture -%}
                     <a href="{{ year | strip | prepend: '/timeline.html#' | relative_url }}" class="mx-1 btn btn-outline-info">View on Timeline</a>{% endif %}
                     {% if page.latitude and page.longitude %}
                     <a href="{{ '/map.html#' | append: page.latitude  | append: ',' | append: page.longitude | relative_url}}" class="mx-1 btn btn-outline-info">View on Map</a>{% endif %}
-                </div>
+                </div>-->
                 <div class="d-flex justify-content-center">
                 <p class="col-9 text-justify">{{page.description}} </p>
             </div>
                 <div class="d-flex justify-content-center">
-                <p class="text-center"><a href="{{page.download}}" target="_blank">Go to the collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}</a></p>
+                <p class="text-center"><a href="{{page.download}}" target="_blank" class="btn btn-outline-success">Go to the collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}</a></p>
                 </div>
             </div>
         </div>

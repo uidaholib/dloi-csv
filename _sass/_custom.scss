@@ -66,3 +66,10 @@ span.value.upper::before {content: "- "; display: inline-block; margin-left: 0.4
 .hidden-range {
     display: none;
 }
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
