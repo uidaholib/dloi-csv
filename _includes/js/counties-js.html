@@ -44,14 +44,14 @@ var map = L.map('map').setView([{{ site.data.theme.latitude | default: 46.727485
     */
 	// get color depending on population density value
 	function getColor(d) {
-		return d > 40 ? '#800026' :
+		return d > 40 ? '#34a0a4' :
 				d > 20  ? '#BD0026' :
-				d > 16  ? '#E31A1C' :
-				d > 12  ? '#FC4E2A' :
-				d > 8   ? '#FD8D3C' :
-				d > 4   ? '#FEB24C' :
-				d > 2   ? '#FED976' :
-							'#FFEDA0';
+				d > 16  ? '#52b69a' :
+				d > 12  ? '#76c893' :
+				d > 8   ? '#99d98c' :
+				d > 4   ? '#b5e48c' :
+				d > 2   ? '#d9ed92' :
+							'#55a630';
 	}
 
 	function style(feature) {
