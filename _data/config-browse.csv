@@ -4,7 +4,7 @@ shortorg,Org,true,,
 date-range,Date,,,Date
 ctrl_subcat,,,true
 material_type,,,true
-ctrl-subject,,,true
+ctrl_subject,,,true
 region,,,true
 county,,,true
 location,,,true
