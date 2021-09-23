@@ -15,7 +15,7 @@ gallery: true
     <h1 class="h1 mb-4"><a class="text-dark" href="{{ page.download }}" target="_blank">{{page.title}}</a></h1>    
 </div>
 <div class="col-md-3 mb-2 text-right">
-    <a class="btn btn-outline-success" href="{{ page.download }}" target="_blank">Go to Collection {% include icon.html filename="box-arrow-up-right" size="18" class="pb-3"%}</a>
+    <a class="btn btn-outline-success" href="{{ page.download }}" target="_blank">{% unless page.shortorg contains "SPUD"%}Go to  collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}{% else %}King Spud Rewards YOU! {% include icon.html filename="trophy" size="12" class="pb-1"%}{% endunless %}</a>
   </div>
 </div>
   <div class="row">
@@ -67,7 +67,7 @@ gallery: true
                 <p class="col-9 text-justify">{{page.description}} </p>
             </div>
                 <div class="d-flex justify-content-center">
-                <p class="text-center"><a href="{{page.download}}" target="_blank" class="btn btn-outline-success">Go to the collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}</a></p>
+                <p class="text-center"><a href="{{page.download}}" target="_blank" class="btn btn-outline-success">{% unless page.shortorg contains "SPUD"%}Go to the collection {% include icon.html filename="box-arrow-up-right" size="12" class="pb-1"%}{% else %}You've WON! Claim Your King Spud Memorabilia {% include icon.html filename="trophy" size="12" class="pb-1"%}{% endunless %}</a></p>
                 </div>
             </div>
         </div>
