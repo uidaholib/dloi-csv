@@ -27,6 +27,9 @@ layout: page
         <label for="max">Maximum year</label>
         <input id="max" class="max" name="max" type="range"  min="{{ beginning }}" max="{{ end }}" />
     </div>
+
+    <div class="text-center mb-3" id="numberOf"></div>
+
     {%- assign items = items | sort: "startdate"  -%}
     {% for item in items %}{% if item.startdate and item.enddate %}
     {% assign bar_width = item.enddate | minus: item.startdate | times: 1.0  %}
@@ -49,6 +52,7 @@ layout: page
 
 <script>
     var thumbsize = 14;
+    var numberOf = document.getElementById("numberOf");
 
 function draw(slider,splitvalue) {
 
@@ -187,6 +191,10 @@ function update(el){
 
     var avgvalue = (minvalue + maxvalue)/2;
 
+    /* add count of filtered collections */
+    var filteredCount = ranges.length - document.querySelectorAll(".hidden-range").length;
+    numberOf.innerHTML = filteredCount + " of " + ranges.length + " collections";
+ 
     /* draw */
     draw(slider,avgvalue);
 }
