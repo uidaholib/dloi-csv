@@ -110,9 +110,9 @@ layout: page
           <div id="collapseZero" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
               <ul>
-                {% for org in site.data.orgs %}
+                {% for org in site.data.orgs %}{% unless org.title contains "Spud" %}
                 <li class="my-1 "><a href="#{{org.title}}" class="text-dark">{{org.title}} ({{org.short}})</a></li>
-                {% endfor %}
+                {% endunless %}{% endfor %}
               </ul>
             </div>
           </div>
