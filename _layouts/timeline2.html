@@ -20,7 +20,7 @@ layout: page
 {% assign total_years = end | minus: beginning  %}
   
     <h3>Date Range for Collections {{ uniqueYears | first }} to {{ uniqueYears | last }}</h3>
-    <p>Use the slider below to limit collections to a specific date range. </p>
+    <p>Use slider to limit collections to specific date range.</p>
     <div class="min-max-slider sticky-top" data-legendnum="2" >
         <label for="min">Minimum year</label>
         <input id="min" class="min" name="min" type="range" step="1" min="{{ beginning }}" max="{{ end }}" />
@@ -154,15 +154,15 @@ function update(el){
         var rangemax = range.getAttribute("data-end");
         var rangeobject = range.getAttribute("data-title");
         /*This code limits the ranges to anything with any range within the parameters -- so lots more ranges */
-        /*if (minvalue > rangemax || maxvalue < rangemin ) {
+        if (minvalue > rangemax || maxvalue < rangemin ) {
             range.classList.add("hidden-range");
           }
         else {
             range.classList.remove("hidden-range");        
-        };*/
+        };
         
         /* The code below will limit to just the ranges within the option -- in some ways this is better but maybe less intuitive to a user */
-      if (minvalue > rangemin) {
+       /*if (minvalue > rangemin) {
             range.classList.add("hidden-range");
           }
         else if (minvalue < rangemin) {
@@ -173,7 +173,7 @@ function update(el){
         }
         else if (maxvalue < rangemax) {
             range.classList.remove("hidden-range");  
-        };
+        };*/
 
 
   }
