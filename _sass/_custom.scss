@@ -23,8 +23,9 @@ element {
 
 }
 /* Date Range Slider from Joost van der Schee at https://codepen.io/joosts/pen/rNLdxvK*/
-.vizdiv{  transition: visibility 0s, opacity 0.5s linear;}
+.vizdiv, .coll-title{  transition: visibility 0s, opacity 0.5s linear;}
 .vizdiv:hover{ background-color: rgba(206, 109, 109, 0.05) !important;}
+.vizdiv:hover .coll-title{display: block !important;}
 
 .min-max-slider {position: relative; width: 100%; text-align: center; margin-bottom: 50px;}
 .min-max-slider > label {display: none;}
