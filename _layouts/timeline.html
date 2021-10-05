@@ -41,7 +41,7 @@ layout: page
     <!--<p x="0" y="0" data-id="{{item.objectid}}" class="mt-3 pl-2 coll-title" style="display:none">{{ item.title }} </p>-->
     <svg class="chart {{item.objectid}}" width="100%" height="45px" style="overflow:visible">
        
-      <rect x="{{bar_start_ratio | times: 100}}%" y="0" width="{{bar_width_ratio | times: 100}}%" height="20" title="{{ item.title }}} | {{item.date-range}}" fill="{% cycle '#34a0a4','#55a630'%}"  ></rect>
+      <rect x="{{bar_start_ratio | times: 100}}%" y="0" width="{{bar_width_ratio | times: 100}}%" height="20" title="{{ item.title }}} | {{item.date-range}}" fill="#50ADA1"  ></rect>
         <text x="{{bar_start_ratio | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="end">{{item.startdate}} </text>
         {% unless item.startdate == item.enddate %}<text x="{{bar_end | times: 100 }}%" y="15" font-size="15" fill="black" text-anchor="start" class="pl-3"> {{item.enddate}}</text>{% endunless %}
         {% assign startdate = item.startdate | times: 1.0 %}
