@@ -1,0 +1,15 @@
+{%- assign orgs = site.data.orgs  -%}
+<script> 
+    //title,youtubeid,objectid
+    var orgItems = [ {% for o in orgs %}[ {{ o.title | escape | jsonify }}, "{{ o.short }}", {{ o.img | jsonify }}, "{%if o.img == 'isa.png' or o.img == 'isu.png'%}bg-dark p-2{% endif %}" ]{% unless forloop.last %}, {% endunless %}{% endfor %}];
+    var placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E";
+    var randomOrgItems = document.getElementById("randomOrgs");
+    orgItems.sort(function() { return 0.5 - Math.random() });
+    var i;
+    var orgLogos = "";
+    for (i=0; i < {{ orgs | size | at_most: 9 }}; i++) {
+        orgLogo = "<a href='browse.html#" + orgItems[i][0]+"' class='text-center col-xs-12 col-md-3 p-3 m-md-3 m-xs-0'><img class='"+ orgItems[i][3] +"'  src='/assets/img/logos/" + orgItems[i][2] + "' style='max-height:80px;' title='" + orgItems[i][0]+" logo'></a>";
+        orgLogos += orgLogo;
+    }
+    randomOrgItems.innerHTML = orgLogos;
+</script>
