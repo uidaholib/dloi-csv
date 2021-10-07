@@ -30,7 +30,7 @@
         </div>
     </div>
     {% unless site.data.theme.featured-image contains '/' %}<div class="text-right p-0 mt-0">
-        <small><a class="text-info featured-link" href="{{ '/items/' | relative_url | append: site.data.theme.featured-image | append: '.html' }}" title="{{ featuredItem.title | escape }}">Featured Collection</a></small>
+        <small><a class="text-info featured-link" href="{{ '/collections/' | relative_url | append: site.data.theme.featured-image | append: '.html' }}" title="{{ featuredItem.title | escape }}">Featured Collection</a></small>
     </div>{% endunless %}
 </div>
 {%- else -%}
