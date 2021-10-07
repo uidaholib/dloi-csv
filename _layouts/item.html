@@ -113,8 +113,8 @@ gallery: true
     {% else %}
     {% assign forward = 0 %}
     {%- endunless -%}
-    {%- assign back_url = '/items/' | append: itemset[back] | append: '.html' | relative_url -%}
-    {%- assign forward_url = '/items/' | append: itemset[forward] | append: '.html' | relative_url -%}
+    {%- assign back_url = '/collections/' | append: itemset[back] | append: '.html' | relative_url -%}
+    {%- assign forward_url = '/collections/' | append: itemset[forward] | append: '.html' | relative_url -%}
     <div class="text-center">
         <a class="btn btn-secondary" href="{{ back_url }}" id="prev-page-button">&laquo; Previous</a>
         <a class="btn btn-secondary" href="{{ '/browse.html' | relative_url }}" >Back to Browse</a>

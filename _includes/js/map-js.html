@@ -69,7 +69,7 @@
         {% if site.data.theme.map-search == true %}/* bind feature for search */
         feature.layer = layer;{% endif %}
         /* create pop up */
-        var itemHref = '{{ site.baseurl }}/items/' + feature.properties.id + '.html';
+        var itemHref = '{{ site.baseurl }}/collections/' + feature.properties.id + '.html';
         if (feature.properties.img) {
             var thumbSrc = feature.properties.img;
         } else if (feature.properties.format.includes("audio")) {

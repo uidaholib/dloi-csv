@@ -46,7 +46,7 @@ page_gen:
   - data: 'dloi'
     template: 'items'
     name: 'objectid'
-    dir: 'items'
+    dir: 'collections'
     extension: 'html' 
     filter: 'objectid'  
 
