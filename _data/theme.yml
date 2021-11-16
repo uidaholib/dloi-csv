@@ -8,9 +8,8 @@
 #
 # featured image is used in home page banner and in meta markup to represent the collection
 # use either an objectid (from an item in this collect), a relative location of an image in this repo, or a full url to an image elsewhere
-featured-image: elmer-pyne-s-collection-of-hazelton-id-photographs
+featured-image: mining-in-idaho-collection
 # optional: add extra padding around collection title for a larger image feature. 
-
 home-banner-image-position: center # Default is top
 # height of the carousel at the bottom of the home page; this is in px, but just enter a number (don't include "px"). Default is 300
 carousel-height: 400 

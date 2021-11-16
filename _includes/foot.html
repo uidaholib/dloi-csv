@@ -16,7 +16,8 @@
 
 {% if page.layout == "search" %}{% include js/lunr-js.html %}{% endif %}
 {%- if page.layout == "home-infographic" %}{% include js/carousel-js.html %}
-{% include js/random-orgs-js.html %}{% endif -%}
+{% include js/random-orgs-js.html %}
+{% include js/random-featured-image-js.html %}{% endif -%}
 {%- if page.layout contains "timeline" %}
 <script>// init tooltips
           $(function () {
