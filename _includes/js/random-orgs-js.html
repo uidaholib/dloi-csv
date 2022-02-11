@@ -8,7 +8,7 @@
     var i;
     var orgLogos = "";
     for (i=0; i < {{ orgs | size | at_most: 12 }}; i++) {
-        orgLogo = "<a href='browse.html#" + orgItems[i][0]+"' class='text-center col-xs-12 col-md-3 p-3 m-md-3 m-xs-0'><img class='"+ orgItems[i][3] +"'  src='/assets/img/logos/" + orgItems[i][2] + "' style='max-height:73px;' title='" + orgItems[i][0]+" logo'></a>";
+        orgLogo = "<a href='browse.html#" + orgItems[i][0]+"' class='text-center col-xs-12 col-md-3 p-3 m-md-3 m-xs-0'><img class='"+ orgItems[i][3] +"'  src='/assets/img/logos/" + orgItems[i][2] + "' style='max-height:73px;max-width:300px;' title='" + orgItems[i][0]+" logo'></a>";
         orgLogos += orgLogo;
     }
     randomOrgItems.innerHTML = orgLogos;
