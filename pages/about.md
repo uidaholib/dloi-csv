@@ -31,8 +31,8 @@ DLoI is currently a collection of collections, and the founding board members be
 ### Advisory Board
 
 - Devin Becker (chair)
-- Karen LaMotte
 - Tania Harden
+- Karen LaMotte
 - Cheryl Oestricher
 - Ellen Ryan
 - Elisabeth Shook
