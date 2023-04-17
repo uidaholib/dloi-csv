@@ -13,13 +13,9 @@
 
 var map = L.map('map').setView([{{ site.data.theme.latitude | default: 46.727485 }},{{ site.data.theme.longitude | default: -117.014185 }}],{{ site.data.theme.zoom-level | default: 5 }});
 
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
 		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/light-v9',
-		tileSize: 512,
-		zoomOffset: -1
+		attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS'
 	}).addTo(map);
 
 
@@ -124,7 +120,7 @@ geojson = L.geoJson(countyData, {
 	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
 
 
-	var legend = L.control({position: 'bottomright'});
+/*	var legend = L.control({position: 'bottomright'});
 
 	legend.onAdd = function (map) {
 
@@ -146,5 +142,5 @@ geojson = L.geoJson(countyData, {
 		return div;
 	};
 
-	legend.addTo(map);
+	legend.addTo(map);*/
 </script>
