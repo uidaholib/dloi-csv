@@ -51,7 +51,7 @@ function lunr_search () {
             {% assign display = fields | where: 'display','true' %}
             {% for d in display %}
             {% if forloop.first %}
-            '<p class="h4"><a href="{{ "/items" | relative_url }}/' + store[ref].id + '.html">' + store[ref][{{ fields[0].field | escape | jsonify }}]  + '</a></p>' +
+            '<p class="h4"><a href="{{ "/collections" | relative_url }}/' + store[ref].id + '.html">' + store[ref][{{ fields[0].field | escape | jsonify }}]  + '</a></p>' +
             '<p class="ml-3">' +
               {% else %}
               store[ref][{{ d.field | escape | jsonify }}] + '<br> ' +
